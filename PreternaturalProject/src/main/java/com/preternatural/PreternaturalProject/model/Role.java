@@ -3,7 +3,7 @@ package com.preternatural.PreternaturalProject.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USERROLE")
+@Table(name = "USER_ROLE")
 public class Role {
 
 	public Role(int id, String title) {
@@ -18,6 +18,7 @@ public class Role {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private int id;
 	
 	@Column (name = "TITLE")
