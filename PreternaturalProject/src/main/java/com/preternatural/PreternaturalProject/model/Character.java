@@ -9,8 +9,8 @@ public class Character {
 	public Character() {
 		super();
 	}
-	public Character(int id, String picture, String firstname, String lastname, int role, String description,
-			String species, int age, String level) {
+	public Character(int id, String picture, String firstname, String lastname, CharRole role, String description,
+			Species species, int age, Stage stage) {
 		super();
 		this.id = id;
 		this.picture = picture;
@@ -20,17 +20,42 @@ public class Character {
 		this.description = description;
 		this.species = species;
 		this.age = age;
-		this.level = level;
+		this.stage = stage;
 	}
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CHARACTER_ID")
 	private int id;
+	
+	@Column(name = "PICTURE")
 	private String picture; 
+	
+	@Column(name = "FIRST_NAME")
 	private String firstname;
+	
+	@Column(name = "LAST_NAME")
 	private String lastname;
-	private int role;
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "CHAR_ROLE_ID")
+	private CharRole role;
+	
+	@Column(name = "DESCRIPTION")
 	private String description;
-	private String species;
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "SPECIES_ID")
+	private Species species;
+	
+	@Column(name = "AGE")
 	private int age; 
-	private String level;
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "STAGE_ID")
+	private Stage stage;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -55,10 +80,10 @@ public class Character {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	public int getRole() {
+	public CharRole getRole() {
 		return role;
 	}
-	public void setRole(int role) {
+	public void setRole(CharRole role) {
 		this.role = role;
 	}
 	public String getDescription() {
@@ -67,10 +92,10 @@ public class Character {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getSpecies() {
+	public Species getSpecies() {
 		return species;
 	}
-	public void setSpecies(String species) {
+	public void setSpecies(Species species) {
 		this.species = species;
 	}
 	public int getAge() {
@@ -79,17 +104,17 @@ public class Character {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public String getLevel() {
-		return level;
+	public Stage getStage() {
+		return stage;
 	}
-	public void setLevel(String level) {
-		this.level = level;
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 	@Override
 	public String toString() {
 		return "Character [id=" + id + ", picture=" + picture + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", role=" + role + ", description=" + description + ", species=" + species + ", age=" + age
-				+ ", level=" + level + "]";
+				+ ", stage=" + stage + "]";
 	}
 	
 }

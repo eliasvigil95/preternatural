@@ -3,7 +3,7 @@ package com.preternatural.PreternaturalProject.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USER_ROLE")
+@Table(name = "USER_ROLES")
 public class Role {
 
 	public Role(int id, String title) {
