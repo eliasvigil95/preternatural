@@ -1,4 +1,4 @@
-package com.preternatural.PreternaturalProject.model;
+package com.preternatural.PreternaturalProject.models;
 
 import javax.persistence.*;
 
