@@ -25,6 +25,7 @@ INSERT INTO STAGES (STAGE_NAME) VALUES ('Expert');
 
 
 INSERT INTO USERS (FIRST_NAME, LAST_NAME, EMAIL, USERNAME, PASS, ROLE_ID) VALUES ('Elias', 'Vigil', 'elias.vigil@mailinator.com', 'Vigilante', 'PreternaturalFan', 1);
+INSERT INTO USERS (FIRST_NAME, LAST_NAME, EMAIL, USERNAME, PASS, ROLE_ID) VALUES ('Joseph', 'Guzman', 'joe.guzman@mailinator.com', 'TheZaMaster', 'ZaMaster', 3);
 
 INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Jason', 'Gray', 1, 0, 'Jason is a high school senior whose powers have just manifested. Unable to control them, he has a reputation of being a thief and a compulsive liar.', 3, 18, 1);  
 INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Collin', 'Gray', 6, 0, 'Collin is a junior in high school and is Jason''s younger brother. He''s also the Captain of the school''s soccer team, which makes him considerably more popular than his older brother.', 3, 16, 0);

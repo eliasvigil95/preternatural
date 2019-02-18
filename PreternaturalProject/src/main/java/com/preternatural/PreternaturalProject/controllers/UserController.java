@@ -76,7 +76,7 @@ public class UserController {
 	@PutMapping(value = "/update")
 	public void updateUser(@RequestBody String userString) {
 		JSONObject json = new JSONObject(userString);
-		User user = new User();
+		User user = userService.getUserById(json.getInt("id"));
 		
 		if (json != null) {
 			user.setEmail(json.getString("email"));
