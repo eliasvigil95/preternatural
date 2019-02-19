@@ -6,9 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.preternatural.PreternaturalProject.models.Character;
-import com.preternatural.PreternaturalProject.models.Role;
-import com.preternatural.PreternaturalProject.models.Species;
-import com.preternatural.PreternaturalProject.models.Stage;
 import com.preternatural.PreternaturalProject.repositories.CharacterRepository;
 
 @Service("characterService")
@@ -34,6 +31,10 @@ public class CharacterService {
 		}
 	}
 	
+	public void deleteCharacterById(int id) {
+		charRepository.deleteById(id);
+	}
+	
 	public List<Character> getCharactersByFirstname(String firstname) {
 		return charRepository.getCharactersByFirstname(firstname);
 	}
@@ -42,7 +43,7 @@ public class CharacterService {
 		return charRepository.getCharactersByLastname(lastname);
 	}
 	
-	public List<Character> getCharactersByRole(Role role) {
+	public List<Character> getCharactersByRole(int role) {
 		return charRepository.getCharactersByRole(role);
 	}
 	
@@ -51,10 +52,10 @@ public class CharacterService {
 	}
 	
 	
-	public List<Character> getCharactersBySpecies(Species species) {
+	public List<Character> getCharactersBySpecies(int species) {
 		return charRepository.getCharactersBySpecies(species);
 	}
-	public List<Character> getCharactersByStage(Stage stage) {
+	public List<Character> getCharactersByStage(int stage) {
 		return charRepository.getCharactersByStage(stage);
 	}
 	

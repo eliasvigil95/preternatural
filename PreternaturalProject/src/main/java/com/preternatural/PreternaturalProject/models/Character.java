@@ -2,6 +2,8 @@ package com.preternatural.PreternaturalProject.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "CHARACTERS")
 public class Character {
@@ -40,11 +42,11 @@ public class Character {
 	@Column(name = "LAST_NAME")
 	private String lastname;
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CHAR_ROLE_ID")
 	private CharRole role;
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CHAR_ROLE_ID_2", nullable = true)
 	private CharRole role2;
 	
@@ -148,6 +150,19 @@ public class Character {
 				+ ", role=" + role + ", role2=" + role2 + ", description=" + description + ", species=" + species
 				+ ", age=" + age + ", stage=" + stage + "]";
 	}
+	
+	@JsonProperty("role")
+	private void unpackNestedRole(int role_id) {
+		this.role = new CharRole();
+		role.setId(role_id);
+	}
+	
+	@JsonProperty("role2")
+	private void unpackNestedRole2(int role_id2) {
+		this.role = new CharRole();
+		role.setId(role_id2);
+	}
+	
 	
 	
 	
