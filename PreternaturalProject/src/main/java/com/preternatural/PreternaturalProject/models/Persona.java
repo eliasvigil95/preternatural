@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "CHARACTERS")
-public class Character {
+public class Persona {
 
-	public Character(int id, String picture, String firstname, String lastname, CharRole role, CharRole role2,
+	public Persona(int id, String picture, String firstname, String lastname, PersonaRole role, PersonaRole role2,
 			String description, Species species, int age, Stage stage) {
 		super();
 		this.id = id;
@@ -23,7 +23,7 @@ public class Character {
 		this.stage = stage;
 	}
 
-	public Character() {
+	public Persona() {
 		super();
 	}
 	
@@ -44,11 +44,11 @@ public class Character {
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CHAR_ROLE_ID")
-	private CharRole role;
+	private PersonaRole role;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CHAR_ROLE_ID_2", nullable = true)
-	private CharRole role2;
+	private PersonaRole role2;
 	
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -96,19 +96,19 @@ public class Character {
 		this.lastname = lastname;
 	}
 
-	public CharRole getRole() {
+	public PersonaRole getRole() {
 		return role;
 	}
 
-	public void setRole(CharRole role) {
+	public void setRole(PersonaRole role) {
 		this.role = role;
 	}
 
-	public CharRole getRole2() {
+	public PersonaRole getRole2() {
 		return role2;
 	}
 
-	public void setRole2(CharRole role2) {
+	public void setRole2(PersonaRole role2) {
 		this.role2 = role2;
 	}
 
@@ -153,13 +153,13 @@ public class Character {
 	
 	@JsonProperty("role")
 	private void unpackNestedRole(int role_id) {
-		this.role = new CharRole();
+		this.role = new PersonaRole();
 		role.setId(role_id);
 	}
 	
 	@JsonProperty("role2")
 	private void unpackNestedRole2(int role_id2) {
-		this.role = new CharRole();
+		this.role = new PersonaRole();
 		role.setId(role_id2);
 	}
 	

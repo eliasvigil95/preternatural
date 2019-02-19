@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.preternatural.PreternaturalProject.models.Role;
+import com.preternatural.PreternaturalProject.models.UserRole;
 import com.preternatural.PreternaturalProject.models.User;
 import com.preternatural.PreternaturalProject.services.UserService;
 
@@ -65,7 +65,7 @@ public class UserController {
 			user.setFirstname(json.getString("firstname"));
 			user.setLastname(json.getString("lastname"));
 			user.setPass(json.getString("password"));
-			user.setRole(new Role(3, "User"));
+			user.setRole(new UserRole(3, "User"));
 			user.setUsername(json.getString("username"));
 		}
 		
@@ -86,7 +86,7 @@ public class UserController {
 			user.setPass(json.getString("password"));
 		}
 		
-		Role r = new Role();
+		UserRole r = new UserRole();
 		JSONObject jsonRole = json.getJSONObject("role");
 		r.setId(jsonRole.getInt("id"));
 		r.setTitle(jsonRole.getString("title"));

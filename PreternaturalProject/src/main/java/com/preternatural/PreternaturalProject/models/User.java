@@ -10,7 +10,7 @@ public class User {
 		super();
 	}
 	
-	public User(int id, String firstname, String lastname, String email, String username, String pass, Role role) {
+	public User(int id, String firstname, String lastname, String email, String username, String pass, UserRole role) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -43,7 +43,7 @@ public class User {
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "ROLE_ID")
-	private Role role;
+	private UserRole role;
 	
 	
 	public int getId() {
@@ -82,10 +82,10 @@ public class User {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public Role getRole() {
+	public UserRole getRole() {
 		return role;
 	}
-	public void setRole(Role role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 	

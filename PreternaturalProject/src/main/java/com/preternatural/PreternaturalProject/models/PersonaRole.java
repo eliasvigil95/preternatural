@@ -4,17 +4,22 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CHARACTER_ROLES")
-public class CharRole {
+public class PersonaRole {
 
-	public CharRole() {
+	public PersonaRole() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CharRole(int id, String title) {
+	public PersonaRole(int id, String title) {
 		super();
 		this.id = id;
 		this.title = title;
+	}
+	
+	public PersonaRole(int id) {
+		super();
+		this.id = id;
 	}
 
 	@Id

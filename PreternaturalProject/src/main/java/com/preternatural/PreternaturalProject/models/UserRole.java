@@ -4,15 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER_ROLES")
-public class Role {
+public class UserRole {
 
-	public Role(int id, String title) {
+	public UserRole(int id, String title) {
 		super();
 		this.id = id;
 		this.title = title;
 	}
 	
-	public Role() {
+	public UserRole() {
 		super();
 	}
 	
