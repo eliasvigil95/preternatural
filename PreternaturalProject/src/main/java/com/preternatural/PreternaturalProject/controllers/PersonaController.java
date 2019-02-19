@@ -95,15 +95,15 @@ public class PersonaController {
 			
 		}
 		
-		PersonaRole cr = new PersonaRole();
-		cr.setId(json.getInt("charRoleId"));
-		cr.setTitle(json.getString("charRoleTitle"));
-		p.setRole(cr);
+		PersonaRole pr = new PersonaRole();
+		pr.setId(json.getInt("charRoleId"));
+		pr.setTitle(json.getString("charRoleTitle"));
+		p.setRole(pr);
 		
-		PersonaRole cr2 = new PersonaRole();
-		cr2.setId(json.getInt("charRoleId2"));
-		cr2.setTitle(json.getString("charRoleTitle2"));
-		p.setRole2(cr2);
+		PersonaRole pr2 = new PersonaRole();
+		pr2.setId(json.getInt("charRoleId2"));
+		pr2.setTitle(json.getString("charRoleTitle2"));
+		p.setRole2(pr2);
 		
 		Species spec = new Species();
 		spec.setId(json.getInt("speciesId"));
@@ -133,15 +133,15 @@ public class PersonaController {
 			
 		}
 		
-		PersonaRole cr = new PersonaRole();
-		cr.setId(json.getInt("charRoleId"));
-		cr.setTitle(json.getString("charRoleTitle"));
-		p.setRole(cr);
+		PersonaRole pr = new PersonaRole();
+		pr.setId(json.getInt("charRoleId"));
+		pr.setTitle(json.getString("charRoleTitle"));
+		p.setRole(pr);
 		
-		PersonaRole cr2 = new PersonaRole();
-		cr2.setId(json.getInt("charRoleId2"));
-		cr2.setTitle(json.getString("charRoleTitle2"));
-		p.setRole2(cr2);
+		PersonaRole pr2 = new PersonaRole();
+		pr2.setId(json.getInt("charRoleId2"));
+		pr2.setTitle(json.getString("charRoleTitle2"));
+		p.setRole2(pr2);
 		
 		Species spec = new Species();
 		spec.setId(json.getInt("speciesId"));
