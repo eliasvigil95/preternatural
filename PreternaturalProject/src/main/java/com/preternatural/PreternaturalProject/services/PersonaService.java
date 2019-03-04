@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.preternatural.PreternaturalProject.models.Persona;
+import com.preternatural.PreternaturalProject.models.PersonaRole;
+import com.preternatural.PreternaturalProject.models.Species;
+import com.preternatural.PreternaturalProject.models.Stage;
 import com.preternatural.PreternaturalProject.repositories.PersonaRepository;
 
 @Service("personaService")
@@ -43,7 +46,7 @@ public class PersonaService {
 		return personaRepository.getPersonasByLastname(lastname);
 	}
 	
-	public List<Persona> getPersonasByRole(int role) {
+	public List<Persona> getPersonasByRole(PersonaRole role) {
 		return personaRepository.getPersonasByRole(role);
 	}
 	
@@ -52,11 +55,11 @@ public class PersonaService {
 	}
 	
 	
-	public List<Persona> getPersonasBySpecies(int speciesId) {
-		return personaRepository.getPersonasBySpecies(speciesId);
+	public List<Persona> getPersonasBySpecies(Species species) {
+		return personaRepository.getPersonasBySpecies(species);
 	}
-	public List<Persona> getPersonasByStage(int stageId) {
-		return personaRepository.getPersonasByStage(stageId);
+	public List<Persona> getPersonasByStage(Stage stage) {
+		return personaRepository.getPersonasByStage(stage);
 	}
 	
 	public void createPersona(Persona persona) {

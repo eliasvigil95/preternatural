@@ -54,11 +54,35 @@ public class PersonaController {
 		return new ResponseEntity<>(personaService.getPersonasByLastname(requestLast), HttpStatus.OK);
 	}
 	
-	// *****
 	@GetMapping(value = "/getByRole/{requestRoleId}")
-	public ResponseEntity<List<Persona>> getPersonasByRole(@PathVariable String requestRoleId) {
-		int id = Integer.parseInt(requestRoleId);
-		return new ResponseEntity<>(personaService.getPersonasByRole(id), HttpStatus.OK);
+	public ResponseEntity<List<Persona>> getPersonasByRole(@PathVariable int requestRoleId) {
+		PersonaRole role = new PersonaRole();
+		role.setId(requestRoleId);
+		if (requestRoleId == 1) {
+			role.setTitle("Protagonist");
+		}
+		else if (requestRoleId == 2) {
+			role.setTitle("Deuteragonist");
+		}
+		else if (requestRoleId == 3) {
+			role.setTitle("Antagonist");
+		}
+		else if (requestRoleId == 4) {
+			role.setTitle("Secondary");
+		}
+		else if (requestRoleId == 5) {
+			role.setTitle("Love Interest");
+		}
+		else if (requestRoleId == 6) {
+			role.setTitle("Teritiary");
+		}
+		else if (requestRoleId == 7) {
+			role.setTitle("Mentor");
+		}
+		else if (requestRoleId == 8) {
+			role.setTitle("Flat");
+		}
+		return new ResponseEntity<>(personaService.getPersonasByRole(role), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/getByAge/{age}")
@@ -68,16 +92,45 @@ public class PersonaController {
 	
 	// *****
 	@GetMapping(value = "/getBySpecies/{requestSpeciesId}") 
-	public ResponseEntity<List<Persona>> getPersonasBySpecies(@PathVariable String requestSpeciesId){
-		int speciesId = Integer.parseInt(requestSpeciesId);
-		return new ResponseEntity<>(personaService.getPersonasBySpecies(speciesId), HttpStatus.OK);
+	public ResponseEntity<List<Persona>> getPersonasBySpecies(@PathVariable int requestSpeciesId){
+		Species species = new Species();
+		species.setId(requestSpeciesId);
+		if (requestSpeciesId == 1) {
+			species.setName("Human");
+		}
+		if (requestSpeciesId == 2) {
+			species.setName("Carrier");
+		}
+		if (requestSpeciesId == 3) {
+			species.setName("Preterhuman");
+		}
+		return new ResponseEntity<>(personaService.getPersonasBySpecies(species), HttpStatus.OK);
 	}
 	
 	// *****
 	@GetMapping (value = "/getByStage/{requestStageId}")
-	public ResponseEntity<List<Persona>> getPersonasByStage(@PathVariable String requestStageId) {
-		int stageId = Integer.parseInt(requestStageId);
-		return new ResponseEntity<>(personaService.getPersonasByStage(stageId), HttpStatus.OK);
+	public ResponseEntity<List<Persona>> getPersonasByStage(@PathVariable int requestStageId) {
+		Stage stage = new Stage();
+		stage.setId(requestStageId);
+		if (requestStageId == -1) {
+			stage.setName("None");
+		}
+		if (requestStageId == 0) {
+			stage.setName("Unmanifested");
+		}
+		if (requestStageId == 1) {
+			stage.setName("Basic");
+		}
+		if (requestStageId == 2) {
+			stage.setName("Intermediate");
+		}
+		if (requestStageId == 3) {
+			stage.setName("Advanced");
+		}
+		if (requestStageId == 4) {
+			stage.setName("Expert");
+		}
+		return new ResponseEntity<>(personaService.getPersonasByStage(stage), HttpStatus.OK);
 	}
 	
 	// *****
