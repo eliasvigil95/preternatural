@@ -90,7 +90,7 @@ public class PersonaController {
 		return new ResponseEntity<>(personaService.getPersonasByAge(age), HttpStatus.OK);
 	}
 	
-	// *****
+
 	@GetMapping(value = "/getBySpecies/{requestSpeciesId}") 
 	public ResponseEntity<List<Persona>> getPersonasBySpecies(@PathVariable int requestSpeciesId){
 		Species species = new Species();
@@ -107,7 +107,7 @@ public class PersonaController {
 		return new ResponseEntity<>(personaService.getPersonasBySpecies(species), HttpStatus.OK);
 	}
 	
-	// *****
+
 	@GetMapping (value = "/getByStage/{requestStageId}")
 	public ResponseEntity<List<Persona>> getPersonasByStage(@PathVariable int requestStageId) {
 		Stage stage = new Stage();

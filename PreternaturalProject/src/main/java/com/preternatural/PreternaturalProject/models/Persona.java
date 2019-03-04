@@ -151,19 +151,4 @@ public class Persona {
 				+ ", age=" + age + ", stage=" + stage + "]";
 	}
 	
-	@JsonProperty("role")
-	private void unpackNestedRole(int role_id) {
-		this.role = new PersonaRole();
-		role.setId(role_id);
-	}
-	
-	@JsonProperty("role2")
-	private void unpackNestedRole2(int role_id2) {
-		this.role = new PersonaRole();
-		role.setId(role_id2);
-	}
-	
-	
-	
-	
 }
