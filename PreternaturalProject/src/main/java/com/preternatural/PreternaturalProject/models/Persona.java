@@ -22,6 +22,20 @@ public class Persona {
 		this.age = age;
 		this.stage = stage;
 	}
+	
+	public Persona(String picture, String firstname, String lastname, PersonaRole role, PersonaRole role2,
+			String description, Species species, int age, Stage stage) {
+		super();
+		this.picture = picture;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.role = role;
+		this.role2 = role2;
+		this.description = description;
+		this.species = species;
+		this.age = age;
+		this.stage = stage;
+	}
 
 	public Persona() {
 		super();

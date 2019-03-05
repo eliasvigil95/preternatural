@@ -19,6 +19,7 @@ import com.preternatural.PreternaturalProject.models.PersonaRole;
 import com.preternatural.PreternaturalProject.models.Persona;
 import com.preternatural.PreternaturalProject.models.Species;
 import com.preternatural.PreternaturalProject.models.Stage;
+import com.preternatural.PreternaturalProject.services.PersonaRoleService;
 import com.preternatural.PreternaturalProject.services.PersonaService;;
 
 @RestController
@@ -27,10 +28,16 @@ import com.preternatural.PreternaturalProject.services.PersonaService;;
 public class PersonaController {
 
 	private PersonaService personaService;
+	private PersonaRoleService personaRoleService;
 	
 	@Autowired
 	public void setPersonaservice(PersonaService personaService) {
 		this.personaService = personaService;
+	}
+	
+	@Autowired
+	public void setPersonaRoleService (PersonaRoleService personaRoleService) {
+		this.personaRoleService = personaRoleService;
 	}
 	
 	@GetMapping("/all")
@@ -138,38 +145,43 @@ public class PersonaController {
 	public ResponseEntity<Persona> createPersona(@RequestBody String personaString) {
 		JSONObject json = new JSONObject(personaString);
 		Persona p = new Persona();
-		
-		if (json != null) {
+		if(json != null) {
 			p.setAge(json.getInt("age"));
 			p.setDescription(json.getString("description"));
 			p.setFirstname(json.getString("firstname"));
 			p.setLastname(json.getString("lastname"));
 			p.setPicture(json.getString("picture"));
 			
+			
 		}
 		
-		PersonaRole pr = new PersonaRole();
-		pr.setId(json.getInt("charRoleId"));
-		pr.setTitle(json.getString("charRoleTitle"));
-		p.setRole(pr);
+		Species species = new Species();
+		species.setId(json.getInt("species_id"));
+		species.setName(json.getString("species_name"));
+		p.setSpecies(species);
 		
-		PersonaRole pr2 = new PersonaRole();
-		pr2.setId(json.getInt("charRoleId2"));
-		pr2.setTitle(json.getString("charRoleTitle2"));
-		p.setRole2(pr2);
-		
-		Species spec = new Species();
-		spec.setId(json.getInt("speciesId"));
-		spec.setName(json.getString("speciesName"));
-		p.setSpecies(spec);
+	
 		
 		Stage stage = new Stage();
-		stage.setId(json.getInt("stageId"));
-		stage.setName(json.getString("stageName"));
+		stage.setId(json.getInt("stage_id"));
+		stage.setName(json.getString("stage_name"));
 		p.setStage(stage);
 		
+		
+		String role1_title = json.getString("role1_title");
+		PersonaRole role1 = personaRoleService.getPersonalRoleByTitle(role1_title);
+		p.setRole(role1);
+		
+		
+		String role2_title = json.getString("role2_title");
+		PersonaRole role2 = personaRoleService.getPersonalRoleByTitle(role2_title);
+		p.setRole2(role2);
+		
+		
 		personaService.createPersona(p);
+		
 		return new ResponseEntity<Persona>(HttpStatus.OK);
+	
 	}
 	
 	@PutMapping(value = "/update")
@@ -207,6 +219,7 @@ public class PersonaController {
 		p.setStage(stage);
 		
 		personaService.updatePersona(p);
+		
 		
 	}
 	

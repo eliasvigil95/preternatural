@@ -17,9 +17,9 @@ public class PersonaRole {
 		this.title = title;
 	}
 	
-	public PersonaRole(int id) {
+	public PersonaRole(String title) {
 		super();
-		this.id = id;
+		this.title = title;
 	}
 
 	@Id
