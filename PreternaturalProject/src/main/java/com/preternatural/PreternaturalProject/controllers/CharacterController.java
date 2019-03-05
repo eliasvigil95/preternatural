@@ -21,7 +21,9 @@ import com.preternatural.PreternaturalProject.models.Character;
 import com.preternatural.PreternaturalProject.models.Species;
 import com.preternatural.PreternaturalProject.models.Stage;
 import com.preternatural.PreternaturalProject.services.CharacterRoleService;
-import com.preternatural.PreternaturalProject.services.CharacterService;;
+import com.preternatural.PreternaturalProject.services.CharacterService;
+import com.preternatural.PreternaturalProject.services.SpeciesService;
+import com.preternatural.PreternaturalProject.services.StageService;;
 
 @RestController
 @CrossOrigin
@@ -30,6 +32,8 @@ public class CharacterController {
 
 	private CharacterService characterService;
 	private CharacterRoleService characterRoleService;
+	private SpeciesService speciesService;
+	private StageService stageService;
 	
 	@Autowired
 	public void setCharacterService(CharacterService characterService) {
@@ -37,19 +41,28 @@ public class CharacterController {
 	}
 	
 	@Autowired
-	public void setPersonaRoleService (CharacterRoleService characterRoleService) {
+	public void setCharacterRoleService (CharacterRoleService characterRoleService) {
 		this.characterRoleService = characterRoleService;
 	}
 	
+	@Autowired
+	public void setSpeciesService (SpeciesService speciesService) {
+		this.speciesService = speciesService;
+	}
+	
+	@Autowired
+	public void setStageService (StageService stageService) {
+		this.stageService = stageService;
+	}
+	 
 	@GetMapping("/all")
 	public ResponseEntity<List<Character>> getAllCharacters() {
 		return new ResponseEntity<> (characterService.getAllCharacters(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/character/{requestId}")
-	public ResponseEntity<Character> getCharacterById(@PathVariable String requestId) {
-		int id = Integer.parseInt(requestId);
-		return new ResponseEntity<>(characterService.getCharacterById(id), HttpStatus.OK);
+	public ResponseEntity<Character> getCharacterById(@PathVariable int requestId) {
+		return new ResponseEntity<>(characterService.getCharacterById(requestId), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/getByFirstname/{requestFirst}")
@@ -82,85 +95,44 @@ public class CharacterController {
 
 	@GetMapping(value = "/getBySpecies/{requestSpeciesId}") 
 	public ResponseEntity<List<Character>> getCharactersBySpecies(@PathVariable int requestSpeciesId){
-		Species species = new Species();
-		species.setId(requestSpeciesId);
-		if (requestSpeciesId == 1) {
-			species.setName("Human");
-		}
-		if (requestSpeciesId == 2) {
-			species.setName("Carrier");
-		}
-		if (requestSpeciesId == 3) {
-			species.setName("Preterhuman");
-		}
+		Species species = speciesService.getSpeciesById(requestSpeciesId);
 		return new ResponseEntity<>(characterService.getCharactersBySpecies(species), HttpStatus.OK);
 	}
 	
 
 	@GetMapping (value = "/getByStage/{requestStageId}")
 	public ResponseEntity<List<Character>> getCharactersByStage(@PathVariable int requestStageId) {
-		Stage stage = new Stage();
-		stage.setId(requestStageId);
-		if (requestStageId == -1) {
-			stage.setName("None");
-		}
-		if (requestStageId == 0) {
-			stage.setName("Unmanifested");
-		}
-		if (requestStageId == 1) {
-			stage.setName("Basic");
-		}
-		if (requestStageId == 2) {
-			stage.setName("Intermediate");
-		}
-		if (requestStageId == 3) {
-			stage.setName("Advanced");
-		}
-		if (requestStageId == 4) {
-			stage.setName("Expert");
-		}
+		Stage stage = stageService.findStageById(requestStageId);
 		return new ResponseEntity<>(characterService.getCharactersByStage(stage), HttpStatus.OK);
 	}
 	
-	// *****
+
 	@PostMapping(value = "/create")
 	public ResponseEntity<Character> createCharacter(@RequestBody String characterString) {
 		JSONObject json = new JSONObject(characterString);
-		Character p = new Character();
+		Character c = new Character();
 		if(json != null) {
-			p.setAge(json.getInt("age"));
-			p.setDescription(json.getString("description"));
-			p.setFirstname(json.getString("firstname"));
-			p.setLastname(json.getString("lastname"));
-			p.setPicture(json.getString("picture"));
-			
+			c.setAge(json.getInt("age"));
+			c.setDescription(json.getString("description"));
+			c.setFirstname(json.getString("firstname"));
+			c.setLastname(json.getString("lastname"));
+			c.setPicture(json.getString("picture"));
 			
 		}
 		
-		Species species = new Species();
-		species.setId(json.getInt("species_id"));
-		species.setName(json.getString("species_name"));
-		p.setSpecies(species);
+		Species species = speciesService.getSpeciesByName(json.getString("species"));
+		c.setSpecies(species);
 		
-	
+		Stage stage = stageService.findStageByName(json.getString("stage"));
+		c.setStage(stage);
 		
-		Stage stage = new Stage();
-		stage.setId(json.getInt("stage_id"));
-		stage.setName(json.getString("stage_name"));
-		p.setStage(stage);
+		CharacterRole role1 = characterRoleService.getCharacterRoleByTitle(json.getString("role1"));
+		c.setRole(role1);
 		
+		CharacterRole2 role2 = characterRoleService.getCharacterRole2ByTitle(json.getString("role2"));
+		c.setRole2(role2);
 		
-		String role1_title = json.getString("role1_title");
-		CharacterRole role1 = characterRoleService.getCharacterRoleByTitle(role1_title);
-		p.setRole(role1);
-		
-		
-		String role2_title = json.getString("role2_title");
-		CharacterRole2 role2 = characterRoleService.getCharacterRole2ByTitle(role2_title);
-		p.setRole2(role2);
-		
-		
-		characterService.createCharacter(p);
+		characterService.createCharacter(c);
 		
 		return new ResponseEntity<Character>(HttpStatus.OK);
 	
@@ -169,38 +141,30 @@ public class CharacterController {
 	@PutMapping(value = "/update")
 	public void updateCharacter(@RequestBody String characterString) {
 		JSONObject json = new JSONObject(characterString);
-		Character p = characterService.getCharacterById(json.getInt("characterId"));
+		Character c = characterService.getCharacterById(json.getInt("characterId"));
 		
 		if (json != null) {
-			p.setAge(json.getInt("age"));
-			p.setDescription(json.getString("description"));
-			p.setFirstname(json.getString("firstname"));
-			p.setLastname(json.getString("lastname"));
-			p.setPicture(json.getString("picture"));
+			c.setAge(json.getInt("age"));
+			c.setDescription(json.getString("description"));
+			c.setFirstname(json.getString("firstname"));
+			c.setLastname(json.getString("lastname"));
+			c.setPicture(json.getString("picture"));
 			
 		}
 		
-		CharacterRole pr = new CharacterRole();
-		pr.setId(json.getInt("charRoleId"));
-		pr.setTitle(json.getString("charRoleTitle"));
-		p.setRole(pr);
+		CharacterRole cr = characterRoleService.getCharacterRoleByTitle(json.getString("Role 1"));
+		c.setRole(cr);
 		
-		CharacterRole2 pr2 = new CharacterRole2();
-		pr2.setId(json.getInt("charRoleId2"));
-		pr2.setTitle(json.getString("charRoleTitle2"));
-		p.setRole2(pr2);
+		CharacterRole2 cr2 = characterRoleService.getCharacterRole2ByTitle(json.getString("Role 2"));
+		c.setRole2(cr2);
 		
-		Species spec = new Species();
-		spec.setId(json.getInt("speciesId"));
-		spec.setName(json.getString("speciesName"));
-		p.setSpecies(spec);
+		Species spec = speciesService.getSpeciesByName(json.getString("species"));
+		c.setSpecies(spec);
 		
-		Stage stage = new Stage();
-		stage.setId(json.getInt("stageId"));
-		stage.setName(json.getString("stageName"));
-		p.setStage(stage);
+		Stage stage = stageService.findStageByName(json.getString("stage"));
+		c.setStage(stage);
 		
-		characterService.updateCharacter(p);
+		characterService.updateCharacter(c);
 		
 		
 	}
