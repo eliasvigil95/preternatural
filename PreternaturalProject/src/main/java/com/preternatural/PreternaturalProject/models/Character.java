@@ -2,13 +2,13 @@ package com.preternatural.PreternaturalProject.models;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "CHARACTERS")
-public class Persona {
+public class Character {
 
-	public Persona(int id, String picture, String firstname, String lastname, PersonaRole role, PersonaRole role2,
+	public Character(int id, String picture, String firstname, String lastname, CharacterRole role, CharacterRole2 role2,
 			String description, Species species, int age, Stage stage) {
 		super();
 		this.id = id;
@@ -23,7 +23,7 @@ public class Persona {
 		this.stage = stage;
 	}
 	
-	public Persona(String picture, String firstname, String lastname, PersonaRole role, PersonaRole role2,
+	public Character(String picture, String firstname, String lastname, CharacterRole role, CharacterRole2 role2,
 			String description, Species species, int age, Stage stage) {
 		super();
 		this.picture = picture;
@@ -37,7 +37,7 @@ public class Persona {
 		this.stage = stage;
 	}
 
-	public Persona() {
+	public Character() {
 		super();
 	}
 	
@@ -58,11 +58,11 @@ public class Persona {
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CHAR_ROLE_ID")
-	private PersonaRole role;
+	private CharacterRole role;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CHAR_ROLE_ID_2", nullable = true)
-	private PersonaRole role2;
+	private CharacterRole2 role2;
 	
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -110,19 +110,19 @@ public class Persona {
 		this.lastname = lastname;
 	}
 
-	public PersonaRole getRole() {
+	public CharacterRole getRole() {
 		return role;
 	}
 
-	public void setRole(PersonaRole role) {
+	public void setRole(CharacterRole role) {
 		this.role = role;
 	}
 
-	public PersonaRole getRole2() {
+	public CharacterRole2 getRole2() {
 		return role2;
 	}
 
-	public void setRole2(PersonaRole role2) {
+	public void setRole2(CharacterRole2 role2) {
 		this.role2 = role2;
 	}
 
@@ -164,5 +164,7 @@ public class Persona {
 				+ ", role=" + role + ", role2=" + role2 + ", description=" + description + ", species=" + species
 				+ ", age=" + age + ", stage=" + stage + "]";
 	}
+
+	
 	
 }
