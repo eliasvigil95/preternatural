@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.preternatural.PreternaturalProject.models.Power;
 import com.preternatural.PreternaturalProject.models.Stage;
 import com.preternatural.PreternaturalProject.services.PowerService;
+import com.preternatural.PreternaturalProject.services.StageService;
 
 @RestController
 @CrossOrigin
@@ -25,10 +26,16 @@ import com.preternatural.PreternaturalProject.services.PowerService;
 public class PowerController {
 
 	private PowerService powerService;
+	private StageService stageService;
 	
 	@Autowired
 	private void setPowerService(PowerService powerService) {
 		this.powerService = powerService;
+	}
+	
+	@Autowired 
+	private void setStageService(StageService stageService) {
+		this.stageService = stageService;
 	}
 	
 	@GetMapping("/all")
@@ -48,47 +55,34 @@ public class PowerController {
 	
 	@GetMapping("/getByStage/{requestStageId}")
 	public ResponseEntity<List<Power>> getPowersByStage(@PathVariable int requestStageId) {
-		
-		Stage stage = new Stage();
-		stage.setId(requestStageId);
-		
-		if (requestStageId == 1) {
-			stage.setName("Basic");
-		}
-		else if (requestStageId == 2) {
-			stage.setName("Intermediate");
-		}
-		else if (requestStageId == 3) {
-			stage.setName("Advanced");
-		}
-		else if (requestStageId == 4) {
-			stage.setName("Expert");
-		}
+		Stage stage = stageService.findStageById(requestStageId);
 		return new ResponseEntity<>(powerService.getPowersByStage(stage), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/create")
 	public ResponseEntity<Power> createPower(@RequestBody String powerString) {
+		
 		JSONObject json = new JSONObject(powerString);
 		Power pow = new Power();
+		
 		if (json != null) {
+			
 			pow.setName(json.getString("name"));
 			pow.setDescription(json.getString("description"));
 			pow.setPicture(json.getString("picture"));
+			
+			Stage stage = stageService.findStageByName(json.getString("stage_name"));
+			pow.setStage(stage);
+			
+			powerService.createPower(pow);	
 		}
 		
-		Stage stage = new Stage();
-		stage.setId(json.getInt("stage_id"));
-		stage.setName(json.getString("stage_name"));
-		pow.setStage(stage);
-		
-		powerService.createPower(pow);
 		return new ResponseEntity<Power>(HttpStatus.OK);
-		
 	}
 	
 	@PutMapping(value = "/update")
 	public void updatePower(@RequestBody String powerString) {
+		
 		JSONObject json = new JSONObject(powerString);
 		Power pow = powerService.getPowerById(json.getInt("power_id"));
 		
@@ -96,15 +90,11 @@ public class PowerController {
 			pow.setName(json.getString("name"));
 			pow.setDescription(json.getString("description"));
 			pow.setPicture(json.getString("picture"));
-		}
-		
-		Stage stage = new Stage();
-		stage.setId(json.getInt("stage_id"));
-		stage.setName(json.getString("stage_name"));
-		pow.setStage(stage);
-		
-		powerService.updatePower(pow);
-	}
-	
-	
+			
+			Stage stage = stageService.findStageByName(json.getString("stage_name"));
+			pow.setStage(stage);
+			
+			powerService.updatePower(pow);
+		}	
+	}	
 }
