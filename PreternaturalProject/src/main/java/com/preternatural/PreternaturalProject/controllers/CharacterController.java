@@ -75,15 +75,15 @@ public class CharacterController {
 		return new ResponseEntity<>(characterService.getCharactersByLastname(requestLast), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getByRole/{requestRoleId}")
-	public ResponseEntity<List<Character>> getCharactersByRole(@PathVariable int requestRoleId) {
-		CharacterRole role = characterRoleService.getCharacterRoleById(requestRoleId);
+	@GetMapping(value = "/getByRole/{requestRole}")
+	public ResponseEntity<List<Character>> getCharactersByRole(@PathVariable String requestRole) {
+		CharacterRole role = characterRoleService.getCharacterRoleByTitle(requestRole);
 		return new ResponseEntity<>(characterService.getCharactersByRole(role), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getByRole2/{requestRoleId2}")
-	public ResponseEntity<List<Character>> getCharactersByRole2(@PathVariable int requestRoleId2) {
-		CharacterRole2 role2 = characterRoleService.getCharacterRole2ById(requestRoleId2);
+	@GetMapping(value = "/getByRole2/{requestRole2}")
+	public ResponseEntity<List<Character>> getCharactersByRole2(@PathVariable String requestRole2) {
+		CharacterRole2 role2 = characterRoleService.getCharacterRole2ByTitle(requestRole2);
 		return new ResponseEntity<>(characterService.getCharactersByRole2(role2), HttpStatus.OK);
 	}
 	
@@ -93,16 +93,16 @@ public class CharacterController {
 	}
 	
 
-	@GetMapping(value = "/getBySpecies/{requestSpeciesId}") 
-	public ResponseEntity<List<Character>> getCharactersBySpecies(@PathVariable int requestSpeciesId){
-		Species species = speciesService.getSpeciesById(requestSpeciesId);
+	@GetMapping(value = "/getBySpecies/{requestSpecies}") 
+	public ResponseEntity<List<Character>> getCharactersBySpecies(@PathVariable String requestSpecies){
+		Species species = speciesService.getSpeciesByName(requestSpecies);
 		return new ResponseEntity<>(characterService.getCharactersBySpecies(species), HttpStatus.OK);
 	}
 	
 
-	@GetMapping (value = "/getByStage/{requestStageId}")
-	public ResponseEntity<List<Character>> getCharactersByStage(@PathVariable int requestStageId) {
-		Stage stage = stageService.findStageById(requestStageId);
+	@GetMapping (value = "/getByStage/{requestStage}")
+	public ResponseEntity<List<Character>> getCharactersByStage(@PathVariable String requestStage) {
+		Stage stage = stageService.findStageByName(requestStage);
 		return new ResponseEntity<>(characterService.getCharactersByStage(stage), HttpStatus.OK);
 	}
 	
