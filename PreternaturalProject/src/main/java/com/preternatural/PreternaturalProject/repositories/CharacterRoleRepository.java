@@ -6,6 +6,5 @@ import com.preternatural.PreternaturalProject.models.CharacterRole;
 
 public interface CharacterRoleRepository extends JpaRepository <CharacterRole, Integer> {
 
-
 	CharacterRole findRoleByTitle(String title);
 }

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,10 +54,16 @@ public class PowerController {
 		return new ResponseEntity<>(powerService.getPowerByName(requestName), HttpStatus.OK);
 	}
 	
-	@GetMapping("/getByStage/{requestStageId}")
-	public ResponseEntity<List<Power>> getPowersByStage(@PathVariable int requestStageId) {
-		Stage stage = stageService.findStageById(requestStageId);
+	@GetMapping("/getByStage/{requestStageName}")
+	public ResponseEntity<List<Power>> getPowersByStage(@PathVariable String requestStageName) {
+		Stage stage = stageService.findStageByName(requestStageName);
 		return new ResponseEntity<>(powerService.getPowersByStage(stage), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/delete/{requestName}")
+	@Transactional
+	public void deletePowerByName(@PathVariable String requestName) {
+		powerService.deletePowerByName(requestName);
 	}
 	
 	@PostMapping(value = "/create")
@@ -67,14 +74,14 @@ public class PowerController {
 		
 		if (json != null) {
 			
-			pow.setName(json.getString("name"));
-			pow.setDescription(json.getString("description"));
-			pow.setPicture(json.getString("picture"));
+			pow.setName(json.getString("Name"));
+			pow.setDescription(json.getString("Description"));
+			pow.setPicture(json.getString("Picture"));
 			
-			Stage stage = stageService.findStageByName(json.getString("stage_name"));
+			Stage stage = stageService.findStageByName(json.getString("Stage"));
 			pow.setStage(stage);
 			
-			powerService.createPower(pow);	
+			powerService.createPower(pow);
 		}
 		
 		return new ResponseEntity<Power>(HttpStatus.OK);
@@ -84,14 +91,15 @@ public class PowerController {
 	public void updatePower(@RequestBody String powerString) {
 		
 		JSONObject json = new JSONObject(powerString);
-		Power pow = powerService.getPowerById(json.getInt("power_id"));
+		Power pow = powerService.getPowerById(json.getInt("ID"));
 		
 		if (json != null) {
-			pow.setName(json.getString("name"));
-			pow.setDescription(json.getString("description"));
-			pow.setPicture(json.getString("picture"));
 			
-			Stage stage = stageService.findStageByName(json.getString("stage_name"));
+			pow.setName(json.getString("Name"));
+			pow.setDescription(json.getString("Description"));
+			pow.setPicture(json.getString("Picture"));	
+			
+			Stage stage = stageService.findStageByName(json.getString("Stage"));
 			pow.setStage(stage);
 			
 			powerService.updatePower(pow);

@@ -11,6 +11,8 @@ public interface PowerRepository extends JpaRepository<Power, Integer> {
 
 	Power getPowerById(int id);
 	Power getPowerByName(String name);
+	void deletePowerByName(String name);
 	List<Power> getPowersByStage(Stage stage);
+	
 	
 }

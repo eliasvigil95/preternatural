@@ -41,6 +41,10 @@ public class PowerService {
 		return powerRepository.getPowerByName(name);
 	}
 	
+	public void deletePowerByName(String name) {
+		powerRepository.deletePowerByName(name);
+	}
+	
 	public List<Power> getPowersByStage(Stage stage) {
 		return powerRepository.getPowersByStage(stage);
 	}
