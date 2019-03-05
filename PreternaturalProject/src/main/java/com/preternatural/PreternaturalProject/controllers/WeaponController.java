@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,22 +31,43 @@ public class WeaponController {
 		this.weaponService = weaponService;
 	}
 	
+	/*
+	 * This method calls the getAllWeapons method from weaponService to get all weapons
+	 * from the database. If successful, it returns a status code of 200. 
+	 * 
+	 * Endpoint: localhost:8085/weapons/all
+	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<Weapon>> getAllWeapons() {
 		return new ResponseEntity<>(weaponService.getAllWeapons(), HttpStatus.OK);
 	}
 	
+	/*
+	 * This method calls the getWeaponById method from weaponService and passes in the id
+	 * that was sent in the URL. If successful, it will return the weapon with that same id 
+	 * and a status code of 200.
+	 * 
+	 * Example endpoint: localhost:8085/weapons/getById/11
+	 */
 	@GetMapping("/getById/{requestId}")
 	public ResponseEntity<Weapon> getWeaponById(@PathVariable int requestId) {
 		return new ResponseEntity<>(weaponService.getWeaponById(requestId),HttpStatus.OK);
 	}
 	
+	/*
+	 * This method calls the getWeaponByName method from weaponService and passes in the name 
+	 * of the weapon that was sent in the URL. If a weapon with that name is in the database, 
+	 * it will return that weapon and a status code of 200.
+	 * 
+	 * Example endpoint: localhost:8085/weapons/getByName/Object Safeguard
+	 */
 	@GetMapping("/getByName/{requestName}")
 	public ResponseEntity<Weapon> getWeaponByName(@PathVariable String requestName) {
 		return new ResponseEntity<>(weaponService.getWeaponByName(requestName), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/deleteByName/{requestName}")
+	@Transactional
 	public void deleteWeaponByName(@PathVariable String requestName) {
 		weaponService.deleteWeaponByName(requestName);
 	}

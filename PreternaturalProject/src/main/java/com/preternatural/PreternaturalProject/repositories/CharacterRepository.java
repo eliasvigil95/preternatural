@@ -9,7 +9,10 @@ import com.preternatural.PreternaturalProject.models.CharacterRole2;
 import com.preternatural.PreternaturalProject.models.Species;
 import com.preternatural.PreternaturalProject.models.Stage;
 
-
+/*
+ * CharacterRepository contains CRUD methods that will be used in the CharacterService. 
+ * These methods are associated with the CHARACTERS table.
+ */
 public interface CharacterRepository extends JpaRepository <Character, Integer> {
 
 	List<Character> getCharactersByFirstname(String firstname);
