@@ -33,9 +33,10 @@ public class WeaponController {
 	
 	/*
 	 * This method calls the getAllWeapons method from weaponService to get all weapons
-	 * from the database. If successful, it returns a status code of 200. 
+	 * from the database. If it's successful, it returns all Weapons from the database 
+	 * along with a status code of 200. 
 	 * 
-	 * Endpoint: localhost:8085/weapons/all
+	 * ENDPOINT: localhost:8085/weapons/all
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<Weapon>> getAllWeapons() {
@@ -43,11 +44,12 @@ public class WeaponController {
 	}
 	
 	/*
-	 * This method calls the getWeaponById method from weaponService and passes in the id
-	 * that was sent in the URL. If successful, it will return the weapon with that same id 
-	 * and a status code of 200.
+	 * This method takes in an int (obtained from the URL path) and passes it to another 
+	 * function which searches the database for a Weapon with an ID that matches that int
+	 * whenever a GET request is made to this endpoint. If it's successful, it returns the
+	 * Weapon along with a status code of 200.
 	 * 
-	 * Example endpoint: localhost:8085/weapons/getById/11
+	 * ENDPOINT: localhost:8085/weapons/getById/Weapon ID
 	 */
 	@GetMapping("/getById/{requestId}")
 	public ResponseEntity<Weapon> getWeaponById(@PathVariable int requestId) {
@@ -55,52 +57,107 @@ public class WeaponController {
 	}
 	
 	/*
-	 * This method calls the getWeaponByName method from weaponService and passes in the name 
-	 * of the weapon that was sent in the URL. If a weapon with that name is in the database, 
-	 * it will return that weapon and a status code of 200.
+	 * This method takes in a String (obtained from the URL path) and passes it to another 
+	 * function which searches the database for a Weapon that matches that String 
+	 * whenever a GET request is made to this endpoint. If it's successful, it returns the
+	 * Weapon along with a status code of 200.
 	 * 
-	 * Example endpoint: localhost:8085/weapons/getByName/Object Safeguard
+	 * ENDPOINT: localhost:8085/weapons/getByName/Weapon Name
 	 */
 	@GetMapping("/getByName/{requestName}")
 	public ResponseEntity<Weapon> getWeaponByName(@PathVariable String requestName) {
 		return new ResponseEntity<>(weaponService.getWeaponByName(requestName), HttpStatus.OK);
 	}
 	
+
+	/*
+	 * This method takes in a String (obtained from the URL path) and passes it to another 
+	 * function which searches the database for a Weapon to delete that matches that String 
+	 * whenever a POST request is made to this endpoint. If it's successful, the weapon is 
+	 * deleted from the database. 
+	 * 
+	 * ENDPOINT: localhost:8085/weapons/deleteByName/Name Of The Weapon
+	 */
 	@PostMapping(value = "/deleteByName/{requestName}")
-	@Transactional
+	@Transactional 
+	// "No EntityManager with actual transaction available for current thread - 
+	// cannot reliably process 'persist' call" will happen if this is not here. 
 	public void deleteWeaponByName(@PathVariable String requestName) {
 		weaponService.deleteWeaponByName(requestName);
 	}
 	
+	/*
+	 * This method takes in a String (in JSON format) from the Request Body, creates a 
+	 * JSON Object using that String and then uses the information from the JSON Object
+	 * to create a new Weapon whenever a POST request is made to this endpoint. If it's 
+	 * successful, it returns a status code of 200. 
+	 * 
+	 * ENDPOINT: localhost:8085/weapons/create
+	 */
 	@PostMapping(value = "/create")
 	public ResponseEntity<Weapon> createWeapon(@RequestBody String weaponString) {
 		
+		// takes in weaponString from the Request Body and creates a JSON Object
+		// called json
 		JSONObject json = new JSONObject(weaponString);
+		
+		// creates a new instance of the Weapon class
 		Weapon w = new Weapon();
 		
 		if (json != null) {
 			
+			// takes in the "weapon_name" key from json and 
+			// uses it to set the new Weapon's name to be 
+			// equal to its value. 
 			w.setName(json.getString("weapon_name"));
+			
+			// takes in the "description" key from json and 
+			// uses it to set the new Weapon's description to 
+			// be equal to its value. 
 			w.setDescription(json.getString("description"));
 			
+			// calls the createWeapon method from weaponService, 
+			// passes in Weapon w and then creates a new Weapon
+			// in the database
 			weaponService.createWeapon(w);
 		}
 		
+		// returns a status code of 200.
 		return new ResponseEntity<Weapon>(HttpStatus.OK);
 		
 	}
 	
+	/*
+	 * This method takes in a String (in JSON format) from the Request Body, 
+	 * creates a JSON Object using that String and then uses the information 
+	 * from the JSON Object to select a Weapon and update its details whenever
+	 * a PUT request is made to this endpoint. 
+	 * 
+	 * ENDPOINT: localhost:8085/weapons/update
+	 */
 	@PutMapping(value = "/update")
 	public void updateWeapon(@RequestBody String weaponString) {
 		
+		// takes in weaponString from the Request Body and creates a JSON 
+		// Object called json
 		JSONObject json = new JSONObject(weaponString);
+		
+		// takes in the "weapon_id" key from json and uses it to search for
+		// a weapon with that id and set it equal to Weapon w. 
 		Weapon w = weaponService.getWeaponById(json.getInt("weapon_id"));
 		
 		if (json != null) {
 			
+			// takes in the "weapon_name" key from json and uses it to set 
+			// the name of Weapon w to be equal to its value. 
 			w.setName(json.getString("weapon_name"));
+			
+			//takes in the "weapon_description" from json and uses it 
+			// to set the Weapon w's description to be equal to its value. 
 			w.setDescription(json.getString("weapon_description"));
 			
+			// calls the updateWeapon method from weaponService, passes in 
+			// Weapon w and updates the weapon in the database. 
 			weaponService.updateWeapon(w);
 		} 
 	}
