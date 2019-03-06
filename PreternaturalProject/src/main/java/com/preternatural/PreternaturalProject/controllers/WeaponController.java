@@ -81,7 +81,7 @@ public class WeaponController {
 	@PostMapping(value = "/deleteByName/{requestName}")
 	@Transactional 
 	// "No EntityManager with actual transaction available for current thread - 
-	// cannot reliably process 'persist' call" will happen if this is not here. 
+	// cannot reliably process 'persist' call" will happen if @Transactional is not here. 
 	public void deleteWeaponByName(@PathVariable String requestName) {
 		weaponService.deleteWeaponByName(requestName);
 	}

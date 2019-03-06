@@ -86,26 +86,51 @@ public class UserController {
 	 * a JSON Object using that String and then uses the information from the JSON
 	 * Object to create a new User whenever a POST request is made to this 
 	 * endpoint. If it's successful, it returns a status code of 200.
+	 * 
+	 * ENDPOINT: localhost:8085/users/create
 	 */
 	@PostMapping(value = "/create")
 	public ResponseEntity<User> createUser(@RequestBody String userString) {
 		
+		// takes in userString from the Request Body and creates
+		// a JSON Object called json. 
 		JSONObject json = new JSONObject(userString);
-		User user = new User();
+		
+		// creates a new instance of the User class
+		User u = new User();
 		
 		if (json != null) {
 			
-			user.setEmail(json.getString("email"));
-			user.setFirstname(json.getString("firstname"));
-			user.setLastname(json.getString("lastname"));
-			user.setPass(json.getString("password"));
-			user.setRole(new UserRole(1, "User"));
-			user.setUsername(json.getString("username"));
+			// gets the value of "email" key from json 
+			// and sets it to be the new User's email. 
+			u.setEmail(json.getString("email"));
 			
-			userService.createUser(user);
+			// gets the value of "firstname" key from json  
+			// and sets it to be the new User's first name.
+			u.setFirstname(json.getString("firstname"));
+			
+			// gets the value of "lastname" key from json  
+			// and sets it to the new User's last name.
+			u.setLastname(json.getString("lastname"));
+			
+			// gets the value of "password" key from json 
+			// and sets it to be the new User's password.
+			u.setPass(json.getString("password"));
+			
+			// sets the new User's role to be "User"
+			u.setRole(new UserRole(1, "User"));
+			
+			// gets the value of "username" key from json  
+			// and sets it to be the new User's username.
+			u.setUsername(json.getString("username"));
+			
+			// calls the createUser method from userService,
+			// passes in User user and then creates a new
+			// User in the database. 
+			userService.createUser(u);
 		}
 		
-		
+		// returns a status code of 200.
 		return new ResponseEntity<>(HttpStatus.OK); 
 	}
 	
@@ -120,23 +145,48 @@ public class UserController {
 	@PutMapping(value = "/update")
 	public void updateUser(@RequestBody String userString) {
 		
+		// takes in userString from the Request Body   
+		// and creates a JSON Object called json
 		JSONObject json = new JSONObject(userString);
-		User user = userService.getUserById(json.getInt("id"));
+		
+		// takes in the "id" key from json and uses it to select the 
+		// User with that id and set it equal to User u. 
+		User u = userService.getUserById(json.getInt("id"));
 		
 		if (json != null) {
 			
-			user.setEmail(json.getString("email"));
-			user.setFirstname(json.getString("firstname"));
-			user.setLastname(json.getString("lastname"));
-			user.setUsername(json.getString("username"));
-			user.setPass(json.getString("password"));
+			// gets the value of "email" key from json and 
+			// sets it to be the email of selected User.
+			u.setEmail(json.getString("email"));
+			
+			// gets the value of "firstname" key from json and 
+			// sets it to be the first name of selected User.
+			u.setFirstname(json.getString("firstname"));
+			
+			// gets the value of "lastname" key from json and
+			// sets it to be the last name of selected User.
+			u.setLastname(json.getString("lastname"));
+			
+			// gets the value of "username" key from json and 
+			// sets it to be the username of selected User.
+			u.setUsername(json.getString("username"));
+			
+			// gets the value "password" key from json and
+			// sets it to be the password of selected User.
+			u.setPass(json.getString("password"));
 			
 		}
 		
+		// gets the value of "role" key from json and passes it to another 
+		// function which searches the database for a UserRole that matches.
 		UserRole r = userRoleService.getUserRoleByTitle(json.getString("role"));
-		user.setRole(r);
 		
-		userService.updateUser(user);
+		// sets the role of selected User to be equal to that UserRole.
+		u.setRole(r);
+		
+		// calls the updateUser function from userService, passes in
+		// User u and updates the User in the database.
+		userService.updateUser(u);
 		
 	}
 }
