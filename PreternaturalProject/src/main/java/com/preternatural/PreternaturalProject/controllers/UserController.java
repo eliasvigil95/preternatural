@@ -101,28 +101,28 @@ public class UserController {
 		
 		if (json != null) {
 			
-			// gets the value of "email" key from json 
+			// gets the value of "Email" key from json 
 			// and sets it to be the new User's email. 
-			u.setEmail(json.getString("email"));
+			u.setEmail(json.getString("Email"));
 			
-			// gets the value of "firstname" key from json  
+			// gets the value of "First Name" key from json  
 			// and sets it to be the new User's first name.
-			u.setFirstname(json.getString("firstname"));
+			u.setFirstname(json.getString("First Name"));
 			
-			// gets the value of "lastname" key from json  
+			// gets the value of "Last Name" key from json  
 			// and sets it to the new User's last name.
-			u.setLastname(json.getString("lastname"));
+			u.setLastname(json.getString("Last Name"));
 			
-			// gets the value of "password" key from json 
+			// gets the value of "Password" key from json 
 			// and sets it to be the new User's password.
-			u.setPass(json.getString("password"));
+			u.setPass(json.getString("Password"));
 			
 			// sets the new User's role to be "User"
 			u.setRole(new UserRole(1, "User"));
 			
-			// gets the value of "username" key from json  
+			// gets the value of "Username" key from json  
 			// and sets it to be the new User's username.
-			u.setUsername(json.getString("username"));
+			u.setUsername(json.getString("Username"));
 			
 			// calls the createUser method from userService,
 			// passes in User user and then creates a new
@@ -135,7 +135,7 @@ public class UserController {
 	}
 	
 	/*
-	 * This method takes in a String (in JSON format) from the RequestBody, creates 
+	 * This method takes in a String (in JSON format) from the Request Body, creates 
 	 * a JSON Object using that String and then uses the information from the JSON
 	 * Object to select a User and update their details whenever a PUT request is 
 	 * made to this endpoint. 
@@ -149,39 +149,39 @@ public class UserController {
 		// and creates a JSON Object called json
 		JSONObject json = new JSONObject(userString);
 		
-		// takes in the "id" key from json and uses it to select the 
-		// User with that id and set it equal to User u. 
-		User u = userService.getUserById(json.getInt("id"));
+		// takes in the "User ID" key from json and uses it to 
+		// select the User with that id and set it equal to User u. 
+		User u = userService.getUserById(json.getInt("User ID"));
 		
 		if (json != null) {
 			
-			// gets the value of "email" key from json and 
+			// gets the value of "Email" key from json and 
 			// sets it to be the email of selected User.
-			u.setEmail(json.getString("email"));
+			u.setEmail(json.getString("Email"));
 			
-			// gets the value of "firstname" key from json and 
+			// gets the value of "First Name" key from json and 
 			// sets it to be the first name of selected User.
-			u.setFirstname(json.getString("firstname"));
+			u.setFirstname(json.getString("First Name"));
 			
 			// gets the value of "lastname" key from json and
 			// sets it to be the last name of selected User.
-			u.setLastname(json.getString("lastname"));
+			u.setLastname(json.getString("Last Name"));
 			
 			// gets the value of "username" key from json and 
 			// sets it to be the username of selected User.
-			u.setUsername(json.getString("username"));
+			u.setUsername(json.getString("Username"));
 			
 			// gets the value "password" key from json and
 			// sets it to be the password of selected User.
-			u.setPass(json.getString("password"));
+			u.setPass(json.getString("Password"));
 			
 		}
 		
 		// gets the value of "role" key from json and passes it to another 
 		// function which searches the database for a UserRole that matches.
-		UserRole r = userRoleService.getUserRoleByTitle(json.getString("role"));
+		UserRole r = userRoleService.getUserRoleByTitle(json.getString("Role"));
 		
-		// sets the role of selected User to be equal to that UserRole.
+		// sets the role of selected User to be that UserRole.
 		u.setRole(r);
 		
 		// calls the updateUser function from userService, passes in
