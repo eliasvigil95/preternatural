@@ -108,11 +108,11 @@ public class WeaponController {
 			
 			// gets the value of "weapon_name" key from json and 
 			// sets it to be the new Weapon's name. 
-			w.setName(json.getString("weapon_name"));
+			w.setName(json.getString("Name"));
 			
 			// gets the value of  "description" key from json and 
 			// sets it to be the new Weapon's description. 
-			w.setDescription(json.getString("description"));
+			w.setDescription(json.getString("Description"));
 			
 			// calls the createWeapon method from weaponService, 
 			// passes in Weapon w and then creates a new Weapon
@@ -142,17 +142,17 @@ public class WeaponController {
 		
 		// gets the value of "weapon_id" key from json and uses it to search for
 		// a weapon with that id and set it equal to Weapon w. 
-		Weapon w = weaponService.getWeaponById(json.getInt("weapon_id"));
+		Weapon w = weaponService.getWeaponById(json.getInt("Weapon ID"));
 		
 		if (json != null) {
 			
 			// gets the value of "weapon_name" key from json 
 			// and sets it to be the name of Weapon w . 
-			w.setName(json.getString("weapon_name"));
+			w.setName(json.getString("Name"));
 			
 			// gets the value of "weapon_description" from json 
 			// and sets it to be Weapon w's description . 
-			w.setDescription(json.getString("weapon_description"));
+			w.setDescription(json.getString("Description"));
 			
 			// calls the updateWeapon method from weaponService, passes in 
 			// Weapon w and updates the weapon in the database. 

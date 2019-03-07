@@ -171,7 +171,7 @@ public class PowerController {
 		
 		// gets the value of "ID" key from json and uses it to select 
 		// the Power with that ID and set it equal to Power pow. 
-		Power pow = powerService.getPowerById(json.getInt("ID"));
+		Power pow = powerService.getPowerById(json.getInt("Power ID"));
 		
 		if (json != null) {
 			
