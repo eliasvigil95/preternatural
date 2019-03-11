@@ -10,14 +10,6 @@ import { Character } from '../models/character.model';
 
 export class CharacterService {
 
-  // character: Character = null;
-
-  httpHeaders = new HttpHeaders({
-    'Content-Type': 'application.json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Headers': 'Content-Type'
-  });
-
   apiUrl: string = "http://localhost:8085/characters";
   
   constructor(private httpClient: HttpClient) { 
@@ -37,21 +29,32 @@ export class CharacterService {
   public getCharactersByLastName(lastname: string){
     return this.httpClient.get<Character[]>(`${this.apiUrl}/getByLastname/`+ lastname);
   }
+
   public getCharactersByRole(role: string){
     return this.httpClient.get<Character[]>(`${this.apiUrl}/getByRole/`+ role);
   }
+
   public getCharactersByRole2(role2: string){
     return this.httpClient.get<Character[]>(`${this.apiUrl}/getByRole2/`+ role2);
   }
+
   public getCharactersByAge(age: number){
     return this.httpClient.get<Character[]>(`${this.apiUrl}/getByAge/`+ age);
   }
+
   public getCharactersBySpecies(species: string){
     return this.httpClient.get<Character[]>(`${this.apiUrl}/getBySpecies/`+ species);
   }
+
   public getCharactersByStage(stage: string){
     return this.httpClient.get<Character[]>(`${this.apiUrl}/getByStage/`+ stage);
   }
-  public createCharacter(character: Character){}
-  public updateCharacter(character: Character){}
+
+  public createCharacter(character: Character){
+    return this.httpClient.post(`${this.apiUrl}/create`, character);
+  }
+  
+  public updateCharacter(character: Character){
+    return this.httpClient.put(`${this.apiUrl}/update`, character);
+  }
 }
