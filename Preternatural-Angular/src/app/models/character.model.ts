@@ -1,12 +1,11 @@
 export class Character {
-    id: number;
-    first: string;
-    last: string;
-    age: number;
-    picture: string;
-    role: string;
-    role2: string;
-    species: string;
-    stage: string;
+    First: string;
+    Last: string;
+    Age: number;
+    Picture: string;
+    Role: string;
+    Role2: string;
+    Species: string;
+    Stage: string;
 
 }
