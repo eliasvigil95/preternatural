@@ -40,6 +40,10 @@ public class UserService {
 		return userRepository.getUserByUsername(username);
 	}
 	
+	public void deleteUserByUsername(String username) {
+		userRepository.deleteUserByUsername(username);
+	}
+	
 	public void createUser(User user) {
 		userRepository.save(user);
 	}

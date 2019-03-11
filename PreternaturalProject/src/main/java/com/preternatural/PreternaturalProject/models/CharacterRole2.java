@@ -1,30 +1,35 @@
 package com.preternatural.PreternaturalProject.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "CHARACTER_ROLES")
-public class PersonaRole {
+@Table(name = "CHARACTER_ROLES_2")
+public class CharacterRole2 {
 
-	public PersonaRole() {
+	public CharacterRole2() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public PersonaRole(int id, String title) {
+	public CharacterRole2(int id, String title) {
 		super();
 		this.id = id;
 		this.title = title;
 	}
 	
-	public PersonaRole(int id) {
+	public CharacterRole2(String title) {
 		super();
-		this.id = id;
+		this.title = title;
 	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column (name = "CHAR_ROLE_ID")
+	@Column (name = "CHAR_ROLE_ID_2")
 	private int id;
 	
 	@Column(name = "TITLE")
@@ -48,7 +53,6 @@ public class PersonaRole {
 
 	@Override
 	public String toString() {
-		return "CharRole [id=" + id + ", title=" + title + "]";
+		return "CharacterRole2 [id=" + id + ", title=" + title + "]";
 	}
-	
 }
