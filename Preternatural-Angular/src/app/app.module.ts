@@ -9,6 +9,7 @@ import { CharactersComponent } from './characters/characters.component';
 import { PowersComponent } from './powers/powers.component';
 import { LoreComponent } from './lore/lore.component';
 import { NavComponent } from './nav/nav.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NavComponent } from './nav/nav.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],
