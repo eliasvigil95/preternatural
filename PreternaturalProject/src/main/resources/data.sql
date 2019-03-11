@@ -7,10 +7,12 @@ INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Protagonist');
 INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Deuteragonist');
 INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Antagonist');
 INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Secondary');
-INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Love Interest');
 INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Tertiary');
-INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Mentor');
 INSERT INTO CHARACTER_ROLES (TITLE) VALUES ('Flat');
+
+INSERT INTO CHARACTER_ROLES_2 (CHAR_ROLE_ID_2, TITLE) VALUES (0, 'Not Applicable');
+INSERT INTO CHARACTER_ROLES_2 (TITLE) VALUES ('Love Interest');
+INSERT INTO CHARACTER_ROLES_2 (TITLE) VALUES ('Mentor');
 
 INSERT INTO SPECIES (SPECIES_NAME) VALUES ('Human');
 INSERT INTO SPECIES (SPECIES_NAME) VALUES ('Carrier');
@@ -28,13 +30,13 @@ INSERT INTO USERS (FIRST_NAME, LAST_NAME, EMAIL, USERNAME, PASS, ROLE_ID) VALUES
 INSERT INTO USERS (FIRST_NAME, LAST_NAME, EMAIL, USERNAME, PASS, ROLE_ID) VALUES ('Joseph', 'Guzman', 'joe.guzman@mailinator.com', 'TheZaMaster', 'ZaMaster', 3);
 
 INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Jason', 'Gray', 1, 0, 'Jason is a high school senior whose powers have just manifested. Unable to control them, he has a reputation of being a thief and a compulsive liar.', 3, 18, 1);  
-INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Collin', 'Gray', 6, 0, 'Collin is a junior in high school and is Jason''s younger brother. He''s also the Captain of the school''s soccer team, which makes him considerably more popular than his older brother.', 3, 16, 0);
-INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Meghan', 'Gray', 6, 0, 'Meghan is Jason''s mother. She has been raising her two boys, Jason and Collin, by herself since her husband Shawn left her 15 years ago.', 2, 45, -1);
-INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Shawn', 'Gray', 6, 0, 'Shawn is Jason''s father. He left his family 15 years ago after moving them to a new place. He has not been heard from since then and is presumed to be dead.', 3, 55, 4); 
-INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Hartley', 'Sinclair', 4, 5, 'Hartley ran away from home after her powers manifested. Believing herself to be dangerous and not wanting to put her family at risk if she were discovered, Hartley left her family and her hometown behind.', 3, 19, 2); 
-INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Roderick', 'Sinclair', 8, 0, 'Roderick is Hartley''s father.', 2, 50, -1);
-INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Madelyn', 'Sinclair', 8, 0, 'Madelyn is Hartley''s mother.', 2, 47, -1);
-INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Luke', 'Flynn', 4, 7, 'Lucas "Luke" Flynn was bullied as child. Caught by Lucian Pierce, he was persuaded to work for the WPN and left after a decade. After he left, his family was attacked and he never forgave himself.', 3, 29, 4);
+INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Collin', 'Gray', 5, 0, 'Collin is a junior in high school and is Jason''s younger brother. He''s also the Captain of the school''s soccer team, which makes him considerably more popular than his older brother.', 3, 16, 0);
+INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Meghan', 'Gray', 5, 0, 'Meghan is Jason''s mother. She has been raising her two boys, Jason and Collin, by herself since her husband Shawn left her 15 years ago.', 2, 45, -1);
+INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Shawn', 'Gray', 5, 0, 'Shawn is Jason''s father. He left his family 15 years ago after moving them to a new place. He has not been heard from since then and is presumed to be dead.', 3, 55, 4); 
+INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Hartley', 'Sinclair', 4, 1, 'Hartley ran away from home after her powers manifested. Believing herself to be dangerous and not wanting to put her family at risk if she were discovered, Hartley left her family and her hometown behind.', 3, 19, 2); 
+INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Roderick', 'Sinclair', 5, 0, 'Roderick is Hartley''s father.', 2, 50, -1);
+INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Madelyn', 'Sinclair', 5, 0, 'Madelyn is Hartley''s mother.', 2, 47, -1);
+INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Luke', 'Flynn', 4, 2, 'Lucas "Luke" Flynn was bullied as child. Caught by Lucian Pierce, he was persuaded to work for the WPN and left after a decade. After he left, his family was attacked and he never forgave himself.', 3, 29, 4);
 INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Sasha', 'Valentine', 4, 0, 'Sasha discovered that she had powers after accidentally injuring someone. After her victim mysteriously died following a visit from Sasha, she was the prime suspect. She''s been on the run looking for the truth ever since.', 3, 27, 4);  
 INSERT INTO CHARACTERS (FIRST_NAME, LAST_NAME, CHAR_ROLE_ID, CHAR_ROLE_ID_2, DESCRIPTION, SPECIES_ID, AGE, STAGE_ID) VALUES ('Lucian', 'Pierce', 3, 0, 'Lucian Pierce is the Founder the World Protection Network. Ever since he was a boy, he has strived to become the most powerful and influential person he can. He will stop at nothing to ensure the existence of Preterhumans is kept a secret.', 3, 47, 4);
  
