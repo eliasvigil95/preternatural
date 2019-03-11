@@ -7,5 +7,4 @@ export class Character {
     Role2: string;
     Species: string;
     Stage: string;
-
 }
