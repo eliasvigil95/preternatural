@@ -78,7 +78,7 @@ public class UserController {
 	@Transactional
 	public void deleteUserByUsername(@RequestBody String user) {
 		JSONObject json = new JSONObject(user);
-		userService.deleteUserByUsername(json.getString("username"));
+		userService.deleteUserByUsername(json.getString("Username"));
 	}
 	
 	/*
@@ -107,18 +107,18 @@ public class UserController {
 			
 			// gets the value of "First Name" key from json  
 			// and sets it to be the new User's first name.
-			u.setFirstname(json.getString("First Name"));
+			u.setFirstname(json.getString("First"));
 			
 			// gets the value of "Last Name" key from json  
 			// and sets it to the new User's last name.
-			u.setLastname(json.getString("Last Name"));
+			u.setLastname(json.getString("Last"));
 			
 			// gets the value of "Password" key from json 
 			// and sets it to be the new User's password.
 			u.setPass(json.getString("Password"));
 			
 			// sets the new User's role to be "User"
-			u.setRole(new UserRole(1, "User"));
+			u.setRole(new UserRole(3, "User"));
 			
 			// gets the value of "Username" key from json  
 			// and sets it to be the new User's username.
@@ -151,7 +151,7 @@ public class UserController {
 		
 		// takes in the "User ID" key from json and uses it to 
 		// select the User with that id and set it equal to User u. 
-		User u = userService.getUserById(json.getInt("User ID"));
+		User u = userService.getUserById(json.getInt("ID"));
 		
 		if (json != null) {
 			
@@ -161,11 +161,11 @@ public class UserController {
 			
 			// gets the value of "First Name" key from json and 
 			// sets it to be the first name of selected User.
-			u.setFirstname(json.getString("First Name"));
+			u.setFirstname(json.getString("First"));
 			
 			// gets the value of "lastname" key from json and
 			// sets it to be the last name of selected User.
-			u.setLastname(json.getString("Last Name"));
+			u.setLastname(json.getString("Last"));
 			
 			// gets the value of "username" key from json and 
 			// sets it to be the username of selected User.

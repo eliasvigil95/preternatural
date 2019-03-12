@@ -1,5 +1,5 @@
 export class Weapon {
-    id: number;
-    name: string;
-    description: string;
+    ID: number;
+    Name: string;
+    Description: string;
 }

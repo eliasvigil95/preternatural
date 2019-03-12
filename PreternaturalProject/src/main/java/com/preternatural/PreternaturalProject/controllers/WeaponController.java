@@ -78,12 +78,13 @@ public class WeaponController {
 	 * 
 	 * ENDPOINT: localhost:8085/weapons/deleteByName/Name Of The Weapon
 	 */
-	@PostMapping(value = "/deleteByName/{requestName}")
+	@PostMapping(value = "/delete")
 	@Transactional 
 	// "No EntityManager with actual transaction available for current thread - 
 	// cannot reliably process 'persist' call" will happen if @Transactional is not here. 
-	public void deleteWeaponByName(@PathVariable String requestName) {
-		weaponService.deleteWeaponByName(requestName);
+	public void deleteWeaponByName(@RequestBody String requestName) {
+		JSONObject json = new JSONObject(requestName);
+		weaponService.deleteWeaponByName(json.getString("Name"));
 	}
 	
 	/*
@@ -142,7 +143,7 @@ public class WeaponController {
 		
 		// gets the value of "weapon_id" key from json and uses it to search for
 		// a weapon with that id and set it equal to Weapon w. 
-		Weapon w = weaponService.getWeaponById(json.getInt("Weapon ID"));
+		Weapon w = weaponService.getWeaponById(json.getInt("ID"));
 		
 		if (json != null) {
 			

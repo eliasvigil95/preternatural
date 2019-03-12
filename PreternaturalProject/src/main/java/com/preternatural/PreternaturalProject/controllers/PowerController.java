@@ -100,10 +100,11 @@ public class PowerController {
 	 * 
 	 * ENDPOINT: localhost:8085/powers/delete/Power Name
 	 */
-	@PostMapping(value = "/delete/{requestName}")
+	@PostMapping(value = "/delete")
 	@Transactional
-	public void deletePowerByName(@PathVariable String requestName) {
-		powerService.deletePowerByName(requestName);
+	public void deletePowerByName(@RequestBody String requestName) {
+		JSONObject json = new JSONObject(requestName);
+		powerService.deletePowerByName(json.getString("Name"));
 	}
 	
 	/*
@@ -171,7 +172,7 @@ public class PowerController {
 		
 		// gets the value of "ID" key from json and uses it to select 
 		// the Power with that ID and set it equal to Power pow. 
-		Power pow = powerService.getPowerById(json.getInt("Power ID"));
+		Power pow = powerService.getPowerById(json.getInt("ID"));
 		
 		if (json != null) {
 			

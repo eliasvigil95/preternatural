@@ -207,11 +207,11 @@ public class CharacterController {
 			
 			// gets the value of the "First Name" key and
 			// sets it to be the new Character's first name.
-			c.setFirstname(json.getString("First Name"));
+			c.setFirstname(json.getString("First"));
 			
 			// gets the value of the "Last Name" key and
 			// sets it to be the new Character's last name.
-			c.setLastname(json.getString("Last Name"));
+			c.setLastname(json.getString("Last"));
 			
 			// gets the value of the "Picture" key and
 			// sets it to be the new Character's picture.
@@ -221,14 +221,14 @@ public class CharacterController {
 		
 		// gets the value of "Role 1" from json and passes it to another 
 		// which searches the database for a CharacterRole that matches. 
-		CharacterRole role1 = characterRoleService.getCharacterRoleByTitle(json.getString("Role 1"));
+		CharacterRole role1 = characterRoleService.getCharacterRoleByTitle(json.getString("Role1"));
 		
 		// sets the new Character's Role to be that CharacterRole. 
 		c.setRole(role1);
 		
 		// gets the value of "Role 2" from json and passes it to another function 
 		// which searches the database for a CharacterRole2 that matches. 
-		CharacterRole2 role2 = characterRoleService.getCharacterRole2ByTitle(json.getString("Role 2"));
+		CharacterRole2 role2 = characterRoleService.getCharacterRole2ByTitle(json.getString("Role2"));
 		
 		// sets the new Character's Role2 to be that CharacterRole2. 
 		c.setRole2(role2);
@@ -265,7 +265,7 @@ public class CharacterController {
 		
 		// takes in the "Character ID" key from json and uses it to select 
 		// the Character with that id and set it equal to Character c. 
-		Character c = characterService.getCharacterById(json.getInt("Character ID"));
+		Character c = characterService.getCharacterById(json.getInt("ID"));
 		
 		if (json != null) {
 			
@@ -279,11 +279,11 @@ public class CharacterController {
 						
 			// gets the value of the "First Name" key and
 			// sets it to be the selected Character's first name.
-			c.setFirstname(json.getString("First Name"));
+			c.setFirstname(json.getString("First"));
 						
 			// gets the value of the "Last Name" key and
 			// sets it to be the selected Character's last name.
-			c.setLastname(json.getString("Last Name"));
+			c.setLastname(json.getString("Last"));
 						
 			// gets the value of the "Picture" key and
 			// sets it to be the selected Character's picture.
@@ -293,14 +293,14 @@ public class CharacterController {
 		
 		// gets the value of "Role 1" from json and passes it to another 
 		// which searches the database for a CharacterRole that matches. 
-		CharacterRole cr = characterRoleService.getCharacterRoleByTitle(json.getString("Role 1"));
+		CharacterRole cr = characterRoleService.getCharacterRoleByTitle(json.getString("Role1"));
 		
 		// sets the selected Character's Role to be that CharacterRole. 
 		c.setRole(cr);
 		
 		// gets the value of "Role 2" from json and passes it to another function 
 		// which searches the database for a CharacterRole2 that matches. 
-		CharacterRole2 cr2 = characterRoleService.getCharacterRole2ByTitle(json.getString("Role 2"));
+		CharacterRole2 cr2 = characterRoleService.getCharacterRole2ByTitle(json.getString("Role2"));
 		
 		// sets the selected Character's Role2 to be that CharacterRole2. 
 		c.setRole2(cr2);

@@ -1,7 +1,7 @@
 export class Power {
-    id: number;
-    name: string;
-    description: string;
-    picture: string;
-    stage: string;
+    ID: number;
+    Name: string;
+    Description: string;
+    Picture: string;
+    Stage: string;
 }
